@@ -1,13 +1,28 @@
 import React, { useState } from 'react';
+import Addusuario from '../helpers/post/Addusuario';
 
 export const Formulario = () => {
   const [product, setProduct] = useState({
+    id: '',
     nombre: '',
     descripcion: '',
     precio: '',
     precioBruto: '',
     cantidad: ''
   });
+
+  const agregarProducto = () =>{
+    if(id!=="" && nombre!=="" && descripcion!=="" && precio!=="" && precioBruto!=="" && cantidad!==""){
+      Addusuario(product.id, product.nombre, product.descripcion, product.cantidad, product.precioBruto, product.precio)
+    }else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Porfavor llena todos los campos",
+      });
+    }
+
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,6 +35,7 @@ export const Formulario = () => {
     console.log(product);
     // Luego puedes reiniciar el formulario
     setProduct({
+      id: '',
       nombre: '',
       descripcion: '',
       precio: '',
@@ -31,6 +47,18 @@ export const Formulario = () => {
   return (
     <div className='' style={{marginLeft: '30vh', marginRight: '30vh', marginTop: '5vh'}}>
     <form onSubmit={handleSubmit}>
+    <div className="form-group">
+        <label htmlFor="id">id</label>
+        <input
+          type="text"
+          className="form-control"
+          id="id"
+          name="id"
+          value={product.id}
+          onChange={handleChange}
+          required
+        />
+      </div>
       <div className="form-group">
         <label htmlFor="nombre">Nombre</label>
         <input
@@ -58,7 +86,7 @@ export const Formulario = () => {
         <label htmlFor="precio">Precio</label>
         <input
           type="number"
-          step="0.01"
+          step="50"
           className="form-control"
           id="precio"
           name="precio"
@@ -71,7 +99,7 @@ export const Formulario = () => {
         <label htmlFor="precioBruto">Precio Bruto</label>
         <input
           type="number"
-          step="0.01"
+          step="50"
           className="form-control"
           id="precioBruto"
           name="precioBruto"
@@ -92,7 +120,7 @@ export const Formulario = () => {
           required
         />
       </div>
-      <button type="submit" className="btn btn-primary mt-3">Agregar Producto</button>
+      <button type="submit" onClick={agregarProducto} className="btn btn-primary mt-3">Agregar Producto</button>
     </form>
     </div>
   );

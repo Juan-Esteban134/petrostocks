@@ -23,14 +23,15 @@ datos.post("/create",(req,res)=>{
     const descripcion = req.body.descripcion
     const cantidad = req.body.cantidad
     const valorComprar = req.body.valorComprar
-    const cantidadVendidos = req.body.cantidadVendidos
+    const cantidadVendidos = req.body.cantidad
+    console.log(req.body)
 
     db.query('INSERT INTO `productos`(`id`, `nombre`, `descripcion`, `cantidad`, `valorComprar`, `valorVenta`, `cantidadVendidos`) VALUES  (?,?,?,?,?,?,?)',[id, nombre, descripcion, cantidad, valorComprar, cantidadVendidos],
     (err,resul)=>{
         if(err){
              res.status(500).json({ error: err.code });
         }else{
-            res.send("registrado")
+            res.send(resul)
         }
     })
 })
@@ -47,3 +48,5 @@ datos.get("/productos",(req,res)=>{
         }
     })
 })
+
+datos.listen(3001,()=>{console.log("Funcionando manin")})

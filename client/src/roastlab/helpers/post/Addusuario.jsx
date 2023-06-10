@@ -2,33 +2,28 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 
-export function Addusuario (Cedula, Nombre, Telefono, Email, Genero, Municipio, setEstadobutton, setEstadolectura, setMenuProduccion) {
+export function Addusuario (id, nombre, descripcion, cantidad, valorComprar, valorVenta) {
 
       
        
-        console.log(Cedula, Nombre, Telefono, Email, Genero, Municipio);
+        console.log(id, nombre, descripcion, cantidad, valorComprar, valorVenta);
         axios.post("http://localhost:3001/create", {
-          Cedula: Cedula,
-          Nombre: Nombre,
-          Tel: Telefono,
-          Email: Email,
-          Genero: Genero,
-          Municipio: Municipio,
+        id: id,  
+        nombre: nombre,
+          descripcion: descripcion,
+          cantidad: cantidad,
+          valorComprar: valorComprar,
+          valorVenta: valorVenta,
         }).then(() => {
-            setMenuProduccion(true);
-            setEstadobutton(true);
-            setEstadolectura(true);
             Swal.fire({
               title: "<strong>Registro exitoso</strong>",
-              html: `<i> el empleado ${Nombre} fue registrado con exito</i> `,
+              html: `<i> el producto ${nombre} fue registrado con exito</i> `,
               icon: "success",
               timer: 3000,
             });
           })
           .catch((error)=> {
-            if(error.response.data[error]=== "ER_DUP_ENTRY"){
-              console.log("si")
-            }
+            console.log(error.response.data+"back");
             //console.error('Error del backend:', error.response.data)
             Swal.fire({
               icon: "error",
