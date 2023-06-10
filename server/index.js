@@ -1,5 +1,5 @@
 const express = require("express")
-const datos =express()
+const datos = express()
 const mysql = require("mysql")
 const cors =require("cors")
 
@@ -7,12 +7,11 @@ const cors =require("cors")
 datos.use(cors());
 datos.use(express.json())
 
-const db =mysql.createConnection({
+const db=mysql.createConnection({
     host:"localhost",
     user:"root",
     password:"",
     database:"dbalmacen"
-
 })
 
 ///--------------------------------------------------------guardar datos----------------------------------------
@@ -23,12 +22,12 @@ datos.post("/create",(req,res)=>{
     const descripcion = req.body.descripcion
     const cantidad = req.body.cantidad
     const valorComprar = req.body.valorComprar
-    const cantidadVendidos = req.body.cantidad
-    console.log(req.body)
-
-    db.query('INSERT INTO `productos`(`id`, `nombre`, `descripcion`, `cantidad`, `valorComprar`, `valorVenta`, `cantidadVendidos`) VALUES  (?,?,?,?,?,?,?)',[id, nombre, descripcion, cantidad, valorComprar, cantidadVendidos],
+    const valorVenta = req.body.valorVenta
+    const cantidadVendidos = req.body.cantidadVendidos
+    db.query('INSERT INTO productos(id, nombre, descripcion, cantidad, valorComprar, valorVenta, cantidadVendidos) VALUES  (?,?,?,?,?,?,?)',[id, nombre, descripcion, cantidad, valorComprar, valorVenta,cantidadVendidos],
     (err,resul)=>{
         if(err){
+            console.log(err);
              res.status(500).json({ error: err.code });
         }else{
             res.send(resul)
@@ -50,3 +49,4 @@ datos.get("/productos",(req,res)=>{
 })
 
 datos.listen(3001,()=>{console.log("Funcionando manin")})
+datos.get

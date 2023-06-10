@@ -2,18 +2,16 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 
-export function Addusuario (id, nombre, descripcion, cantidad, valorComprar, valorVenta) {
-
-      
-       
-        console.log(id, nombre, descripcion, cantidad, valorComprar, valorVenta);
+export function Addusuario (id, nombre, descripcion, cantidad, valorComprar, valorVenta, cantidadVendidos) {
+        console.log(id, nombre, descripcion, cantidad, valorComprar, valorVenta+ cantidadVendidos+" DATA");
         axios.post("http://localhost:3001/create", {
-        id: id,  
-        nombre: nombre,
+          id: id,  
+          nombre: nombre,
           descripcion: descripcion,
-          cantidad: cantidad,
-          valorComprar: valorComprar,
-          valorVenta: valorVenta,
+          cantidad: parseInt(cantidad),
+          valorComprar: parseInt(valorComprar),
+          valorVenta: parseInt(valorVenta),
+          cantidadVendidos: 30
         }).then(() => {
             Swal.fire({
               title: "<strong>Registro exitoso</strong>",
@@ -23,8 +21,7 @@ export function Addusuario (id, nombre, descripcion, cantidad, valorComprar, val
             });
           })
           .catch((error)=> {
-            console.log(error.response.data+"back");
-            //console.error('Error del backend:', error.response.data)
+            console.error(error)
             Swal.fire({
               icon: "error",
               title: "Oops...",

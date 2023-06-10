@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import Swal from 'sweetalert2';
 import Addusuario from '../helpers/post/Addusuario';
 
 export const Formulario = () => {
-  const [product, setProduct] = useState({
-    id: '',
-    nombre: '',
-    descripcion: '',
-    precio: '',
-    precioBruto: '',
-    cantidad: ''
-  });
+  const [Id, setId] = useState("")
+  const [Nombre, setNombre] = useState("")
+  const [Descripcion, setDescripcion] = useState("")
+  const [Cantidad, setCantidad] = useState(0)
+  const [PrecioBruto, setPrecioBruto] = useState(0)
+  const [Precio, setPrecio] = useState(0)
+  const [cantidadVendidos, setCantidadVendidos]= useState(5)
 
   const agregarProducto = () =>{
-    if(id!=="" && nombre!=="" && descripcion!=="" && precio!=="" && precioBruto!=="" && cantidad!==""){
-      Addusuario(product.id, product.nombre, product.descripcion, product.cantidad, product.precioBruto, product.precio)
+    if(Id!=="" && Nombre!=="" && Descripcion!=="" && Precio!==0 && PrecioBruto!==0 && Cantidad!==0){
+      Addusuario(Id, Nombre, Descripcion, Cantidad, PrecioBruto, Precio, cantidadVendidos)
     }else {
       Swal.fire({
         icon: "error",
@@ -21,32 +21,9 @@ export const Formulario = () => {
         text: "Porfavor llena todos los campos",
       });
     }
-
   }
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Aquí puedes realizar la lógica para enviar los datos del producto
-    console.log(product);
-    // Luego puedes reiniciar el formulario
-    setProduct({
-      id: '',
-      nombre: '',
-      descripcion: '',
-      precio: '',
-      precioBruto: '',
-      cantidad: ''
-    });
-  };
-
   return (
     <div className='' style={{marginLeft: '30vh', marginRight: '30vh', marginTop: '5vh'}}>
-    <form onSubmit={handleSubmit}>
     <div className="form-group">
         <label htmlFor="id">id</label>
         <input
@@ -54,8 +31,10 @@ export const Formulario = () => {
           className="form-control"
           id="id"
           name="id"
-          value={product.id}
-          onChange={handleChange}
+          value={Id}
+          onChange={(event) =>{
+            setId(event.target.value)
+          }}
           required
         />
       </div>
@@ -66,8 +45,10 @@ export const Formulario = () => {
           className="form-control"
           id="nombre"
           name="nombre"
-          value={product.nombre}
-          onChange={handleChange}
+          value={Nombre}
+          onChange={(event) =>{
+            setNombre(event.target.value)
+          }}
           required
         />
       </div>
@@ -77,8 +58,10 @@ export const Formulario = () => {
           className="form-control"
           id="descripcion"
           name="descripcion"
-          value={product.descripcion}
-          onChange={handleChange}
+          value={Descripcion}
+          onChange={(event) =>{
+            setDescripcion(event.target.value)
+          }}
           required
         ></textarea>
       </div>
@@ -90,8 +73,10 @@ export const Formulario = () => {
           className="form-control"
           id="precio"
           name="precio"
-          value={product.precio}
-          onChange={handleChange}
+          value={Precio}
+          onChange={(event) =>{
+            setPrecio(event.target.value)
+          }}
           required
         />
       </div>
@@ -103,8 +88,10 @@ export const Formulario = () => {
           className="form-control"
           id="precioBruto"
           name="precioBruto"
-          value={product.precioBruto}
-          onChange={handleChange}
+          value={PrecioBruto}
+          onChange={(event) =>{
+            setPrecioBruto(event.target.value)
+          }}
           required
         />
       </div>
@@ -115,13 +102,14 @@ export const Formulario = () => {
           className="form-control"
           id="cantidad"
           name="cantidad"
-          value={product.cantidad}
-          onChange={handleChange}
+          value={Cantidad}
+          onChange={(event) =>{
+            setCantidad(event.target.value)
+          }}
           required
         />
       </div>
-      <button type="submit" onClick={agregarProducto} className="btn btn-primary mt-3">Agregar Producto</button>
-    </form>
+      <button onClick={agregarProducto} className="btn btn-primary mt-3">Agregar Producto</button>
     </div>
   );
 };
