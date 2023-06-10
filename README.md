@@ -1,0 +1,2 @@
+# petrostocks
+Proyecto de stocks
