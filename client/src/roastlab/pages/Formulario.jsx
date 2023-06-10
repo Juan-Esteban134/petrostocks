@@ -9,7 +9,7 @@ export const Formulario = () => {
   const [Cantidad, setCantidad] = useState(0)
   const [PrecioBruto, setPrecioBruto] = useState(0)
   const [Precio, setPrecio] = useState(0)
-  const [cantidadVendidos, setCantidadVendidos]= useState(5)
+  const [cantidadVendidos, setCantidadVendidos]= useState(0)
 
   const agregarProducto = () =>{
     if(Id!=="" && Nombre!=="" && Descripcion!=="" && Precio!==0 && PrecioBruto!==0 && Cantidad!==0){

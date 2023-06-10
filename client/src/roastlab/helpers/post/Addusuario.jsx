@@ -11,7 +11,7 @@ export function Addusuario (id, nombre, descripcion, cantidad, valorComprar, val
           cantidad: parseInt(cantidad),
           valorComprar: parseInt(valorComprar),
           valorVenta: parseInt(valorVenta),
-          cantidadVendidos: 30
+          cantidadVendidos: parseInt(cantidadVendidos)
         }).then(() => {
             Swal.fire({
               title: "<strong>Registro exitoso</strong>",
