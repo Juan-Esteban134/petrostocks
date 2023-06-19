@@ -69,7 +69,7 @@ datos.get("/productos",(req,res)=>{
 
 // editar producto
 
-datos.post("/edit/:id",(req,res)=>{
+datos.put("/edit/:id",(req,res)=>{
     const id = req.params.id;
     const nombre = req.body.nombre;
     const descripcion = req.body.descripcion;
@@ -107,6 +107,9 @@ datos.delete("/delete/:id",(req,res)=>{
 
 ///--------------------------------------------------------metodos ventas----------------------------------------
 
+
+// crear venta
+
 datos.post("/ventas", (req, res) => {
     const idVenta = req.body.idVenta;
     const idProducto = req.body.idProducto;
@@ -125,6 +128,8 @@ datos.post("/ventas", (req, res) => {
     );
 });
 
+// obtener venta
+
 datos.get("/ventas/:id", (req, res) => {
     const id = req.params.id;
 
@@ -142,6 +147,7 @@ datos.get("/ventas/:id", (req, res) => {
     });
 });
 
+// obtener ventas
 
 datos.get("/ventas", (req, res) => {
     db.query('SELECT * FROM ventas', (err, result) => {
@@ -154,7 +160,7 @@ datos.get("/ventas", (req, res) => {
     });
 });
 
-
+//editar venta
 
 datos.put("/ventas/:id", (req, res) => {
     const id = req.params.id;
@@ -173,6 +179,8 @@ datos.put("/ventas/:id", (req, res) => {
     );
 });
 
+//eliminar venta
+
 datos.delete("/ventas/:id", (req, res) => {
     const id = req.params.id;
 
@@ -187,7 +195,7 @@ datos.delete("/ventas/:id", (req, res) => {
 });
 
 
-//----------------------------------------------------------otros metosdos--------------------------------------
+//----------------------------------------------------------otros metodos--------------------------------------
 
 //prodcuto mas vendido
 
@@ -258,7 +266,7 @@ datos.get("/ventas/total-ventas", (req, res) => {
     });
 });
 
-// priducto de mayor rentabilidad 
+// producto de mayor rentabilidad 
 
 datos.get("/productos/mayor-rentabilidad", (req, res) => {
     db.query('SELECT id, nombre, (valorVenta - valorComprar) AS rentabilidad FROM productos ORDER BY rentabilidad DESC LIMIT 1', (err, result) => {
