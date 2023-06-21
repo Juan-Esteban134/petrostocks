@@ -1,7 +1,13 @@
 import axios from "axios"
 
-export function GetVariedad(setListVariedad){
-    axios.get("http://localhost:3001/getproduct").then((response)=>{
-        setListVariedad(response.data)
-     })
-}
+export function GetProductos() {
+    return axios.get("http://localhost:3001/productos")
+      .then((response) => {
+        console.log(response.data);
+        return response.data;
+      })
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  }
