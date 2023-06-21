@@ -29,6 +29,7 @@ export function SearchPages() {
   const tdStyle = {
     padding: "8px",
     border: "1px solid #ccc",
+    textAlign: "center", // Alineación centrada para la columna del botón
   };
 
   const evenRowStyle = {
@@ -37,6 +38,11 @@ export function SearchPages() {
 
   const hoverRowStyle = {
     backgroundColor: "#e6e6e6",
+  };
+
+  const handleEdit = (producto) => {
+    // Lógica para editar el producto
+    console.log("Editar producto:", producto);
   };
 
   return (
@@ -50,6 +56,7 @@ export function SearchPages() {
             <th style={thStyle}>Descripción</th>
             <th style={thStyle}>Cantidad</th>
             <th style={thStyle}>Valor venta</th>
+            <th style={thStyle}>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -69,6 +76,9 @@ export function SearchPages() {
               <td style={tdStyle}>{producto.descripcion}</td>
               <td style={tdStyle}>{producto.cantidad}</td>
               <td style={tdStyle}>{producto.valorVenta}</td>
+              <td style={tdStyle}>
+                <button onClick={() => handleEdit(producto)}>Editar</button>
+              </td>
             </tr>
           ))}
         </tbody>
