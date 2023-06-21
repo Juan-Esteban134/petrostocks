@@ -43,7 +43,7 @@ export function SearchPages() {
 
   //Css formulario
   const formContainerStyle = {
-    maxWidth: "400px",
+    maxWidth: "70%",
     margin: "20px auto",
     padding: "20px",
     border: "1px solid #ccc",
@@ -74,6 +74,7 @@ export function SearchPages() {
   };
   ////////////////////////////////////
 
+  //logica de la edicion
   const handleEdit = (producto) => {
     setSelectedProduct(producto);
   };
@@ -82,7 +83,9 @@ export function SearchPages() {
     event.preventDefault();
     // Lógica para guardar los cambios del formulario
     console.log("Guardar cambios:", selectedProduct);
+    
   };
+  /////////////////////////////////////
 
   return (
     <div>
@@ -168,7 +171,7 @@ export function SearchPages() {
               onChange={(event) =>
                 setSelectedProduct({
                   ...selectedProduct,
-                  nombre: event.target.value,
+                  cantidad: event.target.value,
                 })
               }
               style={formInputStyle}
