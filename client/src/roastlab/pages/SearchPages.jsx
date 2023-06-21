@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { GetProductos } from '../helpers/get/get';
+import { GetProductos } from "../helpers/get/get";
 
 export function SearchPages() {
   const [productos, setProductos] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     GetProductos()
@@ -40,9 +41,47 @@ export function SearchPages() {
     backgroundColor: "#e6e6e6",
   };
 
+  //Css formulario
+  const formContainerStyle = {
+    maxWidth: "400px",
+    margin: "20px auto",
+    padding: "20px",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+  };
+
+  const formLabelStyle = {
+    display: "block",
+    marginBottom: "8px",
+    fontWeight: "bold",
+  };
+
+  const formInputStyle = {
+    width: "100%",
+    padding: "8px",
+    marginBottom: "16px",
+    border: "1px solid #ccc",
+    borderRadius: "3px",
+  };
+
+  const formButtonStyle = {
+    padding: "8px 16px",
+    backgroundColor: "#4CAF50",
+    color: "white",
+    border: "none",
+    borderRadius: "3px",
+    cursor: "pointer",
+  };
+  ////////////////////////////////////
+
   const handleEdit = (producto) => {
-    // Lógica para editar el producto
-    console.log("Editar producto:", producto);
+    setSelectedProduct(producto);
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    // Lógica para guardar los cambios del formulario
+    console.log("Guardar cambios:", selectedProduct);
   };
 
   return (
@@ -83,6 +122,65 @@ export function SearchPages() {
           ))}
         </tbody>
       </table>
+      {/* Formulario de edicion */}
+      {selectedProduct && (
+        <div style={formContainerStyle}>
+          <h2>Editar Producto</h2>
+          <form onSubmit={handleFormSubmit}>
+            <label style={formLabelStyle}>ID:</label>
+            <input
+              type="text"
+              value={selectedProduct.id}
+              readOnly
+              style={formInputStyle}
+            />
+
+            <label style={formLabelStyle}>Nombre:</label>
+            <input
+              type="text"
+              value={selectedProduct.nombre}
+              onChange={(event) =>
+                setSelectedProduct({
+                  ...selectedProduct,
+                  nombre: event.target.value,
+                })
+              }
+              style={formInputStyle}
+            />
+
+            <label style={formLabelStyle}>Descripción:</label>
+            <input
+              type="text"
+              value={selectedProduct.descripcion}
+              onChange={(event) =>
+                setSelectedProduct({
+                  ...selectedProduct,
+                  descripcion: event.target.value,
+                })
+              }
+              style={formInputStyle}
+            />
+
+            <label style={formLabelStyle}>Cantidad:</label>
+            <input
+              type="text"
+              value={selectedProduct.cantidad}
+              onChange={(event) =>
+                setSelectedProduct({
+                  ...selectedProduct,
+                  nombre: event.target.value,
+                })
+              }
+              style={formInputStyle}
+            />
+
+            <button type="submit" style={formButtonStyle}>
+              Guardar
+            </button>
+          </form>
+        </div>
+      )}
+      {/* ... */}
     </div>
   );
 }
