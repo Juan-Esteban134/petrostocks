@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { GetProductos } from "../helpers/get/get";
 import { UpdateProducto } from "../helpers/update/UpdateUsuario";
+import { borrar } from "../helpers/delete/eliminarProducto";
 
 export function SearchPages() {
   const [productos, setProductos] = useState([]);
@@ -27,6 +28,7 @@ export function SearchPages() {
       selectedProduct.valorVenta
     );
   };
+
 
   const tableStyle = {
     width: "100%",
@@ -92,6 +94,14 @@ export function SearchPages() {
     setSelectedProduct(producto);
   };
 
+  const handleEdit2 = (id) => {
+    console.log(id);
+    borrar(id);
+    setTimeout(() => {
+      location.reload();
+    }, 1000);
+  };
+
   const handleFormSubmit = (event) => {
     event.preventDefault();
     // Lógica para guardar los cambios del formulario
@@ -132,6 +142,7 @@ export function SearchPages() {
               <td style={tdStyle}>{producto.valorVenta}</td>
               <td style={tdStyle}>
                 <button onClick={() => handleEdit(producto)}>Editar</button>
+                <button onClick={() => handleEdit2(producto.id)}>Eliminar</button>
               </td>
             </tr>
           ))}

@@ -104,9 +104,8 @@ datos.put("/edit",(req,res)=>{
 
 //eliminar productos
 
-datos.delete("/delete/:id",(req,res)=>{
-    const id = req.params.id;
-
+datos.post("/delete",(req,res)=>{
+    const id = req.body.id;
     db.query('DELETE FROM productos WHERE id=?', [id],
     (err,result)=>{
         if(err){

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { GetProductosVenta } from "../helpers/get/get";
+import { GetProductos } from "../helpers/get/get";
 import { vender } from "../helpers/post/venderProducto";
 
 export function SellPage() {
@@ -7,7 +7,7 @@ export function SellPage() {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
-    GetProductosVenta()
+    GetProductos()
       .then((data) => {
         setProductos(data);
       })
