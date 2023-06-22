@@ -38,7 +38,7 @@ export function RegisterPage() {
 
   return (
     <div>
-      <h1>Ventas</h1>
+      <h1>Registro de ventas</h1>
       <table style={tableStyle}>
         <thead>
           <tr>
