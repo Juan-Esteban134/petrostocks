@@ -29,7 +29,6 @@ export function SearchPages() {
     );
   };
 
-
   const tableStyle = {
     width: "100%",
     borderCollapse: "collapse",
@@ -95,11 +94,12 @@ export function SearchPages() {
   };
 
   const handleEdit2 = (id) => {
-    console.log(id);
-    borrar(id);
-    setTimeout(() => {
-      location.reload();
-    }, 1000);
+    if (window.confirm("¿Estás seguro? Esta acción no se puede deshacer.")) {
+      borrar(id);
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
+    }
   };
 
   const handleFormSubmit = (event) => {
@@ -142,7 +142,9 @@ export function SearchPages() {
               <td style={tdStyle}>{producto.valorVenta}</td>
               <td style={tdStyle}>
                 <button onClick={() => handleEdit(producto)}>Editar</button>
-                <button onClick={() => handleEdit2(producto.id)}>Eliminar</button>
+                <button onClick={() => handleEdit2(producto.id)}>
+                  Eliminar
+                </button>
               </td>
             </tr>
           ))}

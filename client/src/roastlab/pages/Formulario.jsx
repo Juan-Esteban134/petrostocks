@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import Addusuario from '../helpers/post/Addusuario';
-//prueba
-import { GetProductos } from '../helpers/get/get';
 
 export const Formulario = () => {
   const [Id, setId] = useState("")
@@ -24,19 +22,6 @@ export const Formulario = () => {
       });
     }
   }
-
-  //prueba
-  const consultar = ()=>{
-    GetProductos()
-  .then((productos) => {
-    console.log(productos);
-    // Utiliza los datos de los productos aquí
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-  }
-  //fin prueba
 
   return (
     <div className='' style={{marginLeft: '30vh', marginRight: '30vh', marginTop: '5vh'}}>
@@ -126,8 +111,6 @@ export const Formulario = () => {
         />
       </div>
       <button onClick={agregarProducto} className="btn btn-primary mt-3">Agregar Producto</button>
-      
-      <button onClick={consultar} className="btn btn-primary mt-3">Consultar</button>
     </div>
   );
 };
