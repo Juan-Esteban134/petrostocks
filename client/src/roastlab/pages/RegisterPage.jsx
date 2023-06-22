@@ -16,7 +16,7 @@ export function RegisterPage() {
       GetGanancias()
       .then((data) => {
         setGanancias(data);
-        console.log(ganancias+"sisa");
+        console.log(ganancias);
       })
       .catch((error) => {
         console.error(error);
@@ -50,12 +50,14 @@ export function RegisterPage() {
       <h1>Registro de ventas</h1>
       <table style={tableStyle}>
         <thead>
+        {ganancias.map((ganancia) => (
           <tr>
             <th style={thStyle}>ID</th>
             <th style={thStyle}>Id Producto</th>
-            <th style={thStyle}>Ganancias{ganancias}</th>
+            <th style={thStyle}>Ganancias {"$"+ganancia.sisa}</th>
             <th style={thStyle}>Cantidad Vendida</th>
           </tr>
+          ))}
         </thead>
         <tbody>
           {productos.map((producto, index) => (
