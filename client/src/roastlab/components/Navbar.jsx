@@ -42,7 +42,12 @@ export const Navbar = () => {
                     >
                         Inventario
                     </NavLink>
-                    
+                    <NavLink 
+                        className={({isActive}) =>`nav-item nav-link ${ isActive ? 'active' : '' }`}
+                        to="/venta"
+                    >
+                        Venta
+                    </NavLink>
                     <NavLink 
                         className={({isActive}) =>`nav-item nav-link ${ isActive ? 'active' : '' }`}
                         to="/export"

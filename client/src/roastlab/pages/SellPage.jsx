@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { GetProductos } from "../helpers/get/get";
-import { UpdateProducto } from "../helpers/update/UpdateUsuario";
+import { vender } from "../helpers/post/venderProducto";
 
-export function SearchPages() {
+export function SellPage() {
   const [productos, setProductos] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -16,15 +16,12 @@ export function SearchPages() {
       });
   }, []);
 
-  const update = () => {
-    console.log(selectedProduct);
-    UpdateProducto(
+  const venta = () => {
+    console.log(selectedProduct.id);
+    console.log(selectedProduct.cantidad);
+    vender(
       selectedProduct.id,
-      selectedProduct.nombre,
-      selectedProduct.descripcion,
-      selectedProduct.cantidad,
-      selectedProduct.valorComprar,
-      selectedProduct.valorVenta
+      selectedProduct.cantidad
     );
   };
 
@@ -101,7 +98,7 @@ export function SearchPages() {
 
   return (
     <div>
-      <h1>Tabla de Productos</h1>
+      <h1>Venta de productos</h1>
       <table style={tableStyle}>
         <thead>
           <tr>
@@ -131,7 +128,7 @@ export function SearchPages() {
               <td style={tdStyle}>{producto.cantidad}</td>
               <td style={tdStyle}>{producto.valorVenta}</td>
               <td style={tdStyle}>
-                <button onClick={() => handleEdit(producto)}>Editar</button>
+                <button onClick={() => handleEdit(producto)}>Vender</button>
               </td>
             </tr>
           ))}
@@ -140,46 +137,19 @@ export function SearchPages() {
       {/* Formulario de edicion */}
       {selectedProduct && (
         <div style={formContainerStyle}>
-          <h2>Editar Producto</h2>
+          <h2>Vender Producto</h2>
           <form onSubmit={handleFormSubmit}>
-            <label style={formLabelStyle}>ID:</label>
-            <input
-              type="text"
-              value={selectedProduct.id}
-              readOnly
-              style={formInputStyle}
-            />
-
             <label style={formLabelStyle}>Nombre:</label>
             <input
               type="text"
               value={selectedProduct.nombre}
-              onChange={(event) =>
-                setSelectedProduct({
-                  ...selectedProduct,
-                  nombre: event.target.value,
-                })
-              }
+              readOnly
               style={formInputStyle}
             />
 
-            <label style={formLabelStyle}>Descripción:</label>
+            <label style={formLabelStyle}>Cantidad a vender:</label>
             <input
               type="text"
-              value={selectedProduct.descripcion}
-              onChange={(event) =>
-                setSelectedProduct({
-                  ...selectedProduct,
-                  descripcion: event.target.value,
-                })
-              }
-              style={formInputStyle}
-            />
-
-            <label style={formLabelStyle}>Cantidad:</label>
-            <input
-              type="text"
-              value={selectedProduct.cantidad}
               onChange={(event) =>
                 setSelectedProduct({
                   ...selectedProduct,
@@ -188,37 +158,11 @@ export function SearchPages() {
               }
               style={formInputStyle}
             />
-            <label style={formLabelStyle}>Valor de Compra:</label>
-            <input
-              type="text"
-              value={selectedProduct.valorComprar}
-              onChange={(event) =>
-                setSelectedProduct({
-                  ...selectedProduct,
-                  valorComprar: event.target.value,
-                })
-              }
-              style={formInputStyle}
-            />
-
-            <label style={formLabelStyle}>Valor de Venta:</label>
-            <input
-              type="text"
-              value={selectedProduct.valorVenta}
-              onChange={(event) =>
-                setSelectedProduct({
-                  ...selectedProduct,
-                  valorVenta: event.target.value,
-                })
-              }
-              style={formInputStyle}
-            />
-
             <button
               type="submit"
               style={formButtonStyle}
               onClick={() => {
-                update();
+                venta();
                 setTimeout(() => {
                   location.reload();
                 }, 1000);

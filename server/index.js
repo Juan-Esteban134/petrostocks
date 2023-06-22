@@ -348,9 +348,11 @@ datos.get("/ventas/egresos", (req, res) => {
 
   // vender 
 
-  datos.post("/ventas/vender-producto", (req, res) => {
-    const idProducto = req.body.idProducto;
-    const cantidadVenta = req.body.cantidadVenta;
+  datos.post("/venderproducto", (req, res) => {
+    const idProducto = req.body.id;
+    const cantidadVenta = req.body.cantidad;
+    console.log(req.body.id)
+    console.log(req.body.cantidad)
   
     // Consultar el producto por su ID en la tabla de productos
     db.query(
@@ -383,7 +385,7 @@ datos.get("/ventas/egresos", (req, res) => {
                 } else {
                   // Insertar la venta en la tabla de ventas
                   db.query(
-                    'INSERT INTO ventas (idProducto, ganancias, cantidadVenta) VALUES (?, ?, ?, ?)',
+                    'INSERT INTO ventas (idProducto, ganacias, cantidadVenta) VALUES (?, ?, ?)',
                     [idProducto, ganancias, cantidadVenta],
                     (err, result) => {
                       if (err) {

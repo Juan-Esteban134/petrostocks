@@ -34,4 +34,6 @@ export function Addusuario (id, nombre, descripcion, cantidad, valorComprar, val
      
 }
 
+
+
 export default Addusuario
