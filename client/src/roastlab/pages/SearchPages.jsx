@@ -119,6 +119,7 @@ export function SearchPages() {
             <th style={thStyle}>Nombre</th>
             <th style={thStyle}>Descripción</th>
             <th style={thStyle}>Cantidad</th>
+            <th style={thStyle}>Valor Compra</th>
             <th style={thStyle}>Valor venta</th>
             <th style={thStyle}>Acciones</th>
           </tr>
@@ -139,7 +140,8 @@ export function SearchPages() {
               <td style={tdStyle}>{producto.nombre}</td>
               <td style={tdStyle}>{producto.descripcion}</td>
               <td style={tdStyle}>{producto.cantidad}</td>
-              <td style={tdStyle}>{producto.valorVenta}</td>
+              <td style={tdStyle}>{"$"+producto.valorComprar}</td>
+              <td style={tdStyle}>{"$"+producto.valorVenta}</td>
               <td style={tdStyle}>
                 <button onClick={() => handleEdit(producto)}>Editar</button>
                 <button onClick={() => handleEdit2(producto.id)}>

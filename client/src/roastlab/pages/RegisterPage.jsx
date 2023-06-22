@@ -1,13 +1,22 @@
 import { useState, useEffect } from "react";
-import { GetVentas } from "../helpers/get/get";
+import { GetVentas, GetGanancias } from "../helpers/get/get";
 
 export function RegisterPage() {
   const [productos, setProductos] = useState([]);
+  const [ganancias, setGanancias] = useState([]);
 
   useEffect(() => {
     GetVentas()
       .then((data) => {
         setProductos(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+      GetGanancias()
+      .then((data) => {
+        setGanancias(data);
+        console.log(ganancias+"sisa");
       })
       .catch((error) => {
         console.error(error);
@@ -44,7 +53,7 @@ export function RegisterPage() {
           <tr>
             <th style={thStyle}>ID</th>
             <th style={thStyle}>Id Producto</th>
-            <th style={thStyle}>Ganancias</th>
+            <th style={thStyle}>Ganancias{ganancias}</th>
             <th style={thStyle}>Cantidad Vendida</th>
           </tr>
         </thead>

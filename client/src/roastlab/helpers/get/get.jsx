@@ -37,6 +37,18 @@ export function GetProductos() {
       });
   }
 
+  export function GetGanancias() {
+    return axios.get("http://localhost:3001/ganancias")
+      .then((response) => {
+        console.log(response.data);
+        return response.data;
+      })
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  }
+
   export function GetMasVendido(setProductos, setVendidos) {
       axios.get("http://localhost:3001/productos_mas_vendidos")
       .then((response) => {

@@ -173,7 +173,18 @@ datos.get("/ventass", (req, res) => {
 });
 
 datos.get("/ventas2",(req,res)=>{
-    db.query('SELECT * FROM ventas',
+    db.query('SELECT * FROM ventas ',
+    (err,resul)=>{
+        if(err){
+            console.log(err)
+        }else{
+            res.send(resul)
+        }
+    })
+})
+
+datos.get("/ganancias",(req,res)=>{
+    db.query('SELECT SUM(ganacias) AS sisa FROM ventas',
     (err,resul)=>{
         if(err){
             console.log(err)
