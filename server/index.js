@@ -69,16 +69,18 @@ datos.get("/productos",(req,res)=>{
 
 // editar producto
 
-datos.put("/edit/:id",(req,res)=>{
-    const id = req.params.id;
-    const nombre = req.body.nombre;
-    const descripcion = req.body.descripcion;
-    const cantidad = req.body.cantidad;
-    const valorComprar = req.body.valorComprar;
-    const valorVenta = req.body.valorVenta;
-    const cantidadVendidos = req.body.cantidadVendidos;
+datos.put("/edit",(req,res)=>{
 
-    db.query('UPDATE productos SET nombre=?, descripcion=?, cantidad=?, valorComprar=?, valorVenta=?, cantidadVendidos=? WHERE id=?', [nombre, descripcion, cantidad, valorComprar, valorVenta, cantidadVendidos, id],
+    console.log("Mamada: "+req.body)
+    const id = req.body.Id;
+    const nombre = req.body.Nombre;
+    const descripcion = req.body.Descripcion;
+    const cantidad = req.body.Cantidad;
+    const valorComprar = req.body.ValorComprar;
+    const valorVenta = req.body.ValorVenta;
+
+
+    db.query('UPDATE productos SET nombre=?, descripcion=?, cantidad=?, valorComprar=? ,valorVenta=? WHERE id=?', [nombre, descripcion, cantidad, valorComprar, valorVenta, id],
     (err,result)=>{
         if(err){
             console.log(err);
