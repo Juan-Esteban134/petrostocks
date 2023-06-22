@@ -57,7 +57,18 @@ datos.get("/product/:id", (req, res) => {
 // consultar productos
 
 datos.get("/productos",(req,res)=>{
-    db.query('SELECT * FROM productos',
+    db.query('SELECT * FROM productos ORDER BY cantidad',
+    (err,resul)=>{
+        if(err){
+            console.log(err)
+        }else{
+            res.send(resul)
+        }
+    })
+})
+
+datos.get("/productosVenta",(req,res)=>{
+    db.query('SELECT * FROM productos WHERE cantidad > 0',
     (err,resul)=>{
         if(err){
             console.log(err)
