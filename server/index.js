@@ -222,14 +222,14 @@ datos.delete("/ventas/:id", (req, res) => {
 
 //prodcuto mas vendido
 
-datos.get("/productos/mas-vendido", (req, res) => {
-    db.query('SELECT idProducto, SUM(cantidadVenta) AS totalVentas FROM ventas GROUP BY idProducto ORDER BY totalVentas DESC LIMIT 1', (err, result) => {
+datos.get("/productos_mas_vendidos", (req, res) => {
+    db.query('SELECT p.nombre, SUM(cantidadVenta) AS totalVentas FROM ventas JOIN productos p on ventas.idProducto=p.id GROUP BY idProducto ORDER BY totalVentas DESC', (err, result) => {
         if (err) {
             console.log(err);
             res.status(500).json({ error: err.code });
         } else {
             if (result.length > 0) {
-                res.send(result[0]);
+                res.send(result);
             } else {
                 res.status(404).json({ message: "No se encontraron productos vendidos" });
             }
