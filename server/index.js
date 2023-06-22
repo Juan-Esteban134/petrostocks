@@ -286,5 +286,130 @@ datos.get("/productos/mayor-rentabilidad", (req, res) => {
 });
 
 
+// ventas por dia 
+
+datos.get("/ventas/por-dia/:fecha", (req, res) => {
+    const fecha = req.params.fecha;
+    
+    // Obtener la fecha de inicio y fin del día
+    const fechaInicio = new Date(fecha);
+    fechaInicio.setHours(0, 0, 0, 0);
+    
+    const fechaFin = new Date(fecha);
+    fechaFin.setHours(23, 59, 59, 999);
+    
+    db.query(
+      'SELECT * FROM ventas WHERE fechaVenta >= ? AND fechaVenta <= ?',
+      [fechaInicio, fechaFin],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).json({ error: err.code });
+        } else {
+          res.send(result);
+        }
+      }
+    );
+  });
+  
+// ingresos 
+
+datos.get("/ventas/ingresos", (req, res) => {
+    db.query(
+      'SELECT SUM(ganancias) AS totalIngresos FROM ventas',
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).json({ error: err.code });
+        } else {
+          const totalIngresos = result[0].totalIngresos || 0;
+          res.send({ totalIngresos });
+        }
+      }
+    );
+  });
+
+// egresos 
+
+datos.get("/ventas/egresos", (req, res) => {
+    db.query(
+      'SELECT SUM(costoCompra * cantidad) AS totalEgresos FROM ventas',
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).json({ error: err.code });
+        } else {
+          const totalEgresos = result[0].totalEgresos || 0;
+          res.send({ totalEgresos });
+        }
+      }
+    );
+  });
+
+
+  // vender 
+  
+  datos.post("/ventas/vender-producto", (req, res) => {
+    const idProducto = req.body.idProducto;
+    const cantidadVenta = req.body.cantidadVenta;
+  
+    // Consultar el producto por su ID en la tabla de productos
+    db.query(
+      'SELECT * FROM productos WHERE id = ?',
+      [idProducto],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).json({ error: err.code });
+        } else if (result.length === 0) {
+          res.status(404).json({ error: "Producto no encontrado" });
+        } else {
+          const producto = result[0];
+          
+          if (producto.cantidad < cantidadVenta) {
+            res.status(400).json({ error: "No hay suficiente cantidad de producto disponible" });
+          } else {
+            // Calcular ganancias
+            const ganancias = (producto.valorVenta - producto.valorComprar) * cantidadVenta;
+  
+            // Actualizar la cantidad de producto en la tabla de productos
+            const nuevaCantidad = producto.cantidad - cantidadVenta;
+            db.query(
+              'UPDATE productos SET cantidad = ? WHERE id = ?',
+              [nuevaCantidad, idProducto],
+              (err, result) => {
+                if (err) {
+                  console.log(err);
+                  res.status(500).json({ error: err.code });
+                } else {
+                  // Insertar la venta en la tabla de ventas
+                  const fechaVenta = new Date();
+                  db.query(
+                    'INSERT INTO ventas (idProducto, ganancias, cantidadVenta, fechaVenta) VALUES (?, ?, ?, ?)',
+                    [idProducto, ganancias, cantidadVenta, fechaVenta],
+                    (err, result) => {
+                      if (err) {
+                        console.log(err);
+                        res.status(500).json({ error: err.code });
+                      } else {
+                        res.send({ message: "Venta realizada exitosamente" });
+                      }
+                    }
+                  );
+                }
+              }
+            );
+          }
+        }
+      }
+    );
+  });
+  
+  
+
+  
+
+
+
 datos.listen(3001,()=>{console.log("Funcionando manin")})
 datos.get
