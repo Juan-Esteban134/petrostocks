@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navbar } from '../components'
 import { Route, Routes, Navigate } from 'react-router-dom'
-import { Formulario, Mainpage, SearchPages, ExportPage, SellPage } from '../pages'
+import { Formulario, Mainpage, SearchPages, ExportPage, SellPage, RegisterPage } from '../pages'
 
 
 export const RoastLabRoutes = () => {
@@ -13,6 +13,7 @@ export const RoastLabRoutes = () => {
             <Route path="inicio" element={ <Mainpage/> }/>
             <Route path="search" element={ <SearchPages/> }/>
             <Route path="venta" element={ <SellPage/> }/>
+            <Route path="registro" element={ <RegisterPage/> }/>
             <Route path="export" element={ <ExportPage/> }/>
             <Route path="/" element={ <Navigate to="/inicio"/> }/>
         </Routes>

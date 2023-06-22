@@ -50,6 +50,12 @@ export const Navbar = () => {
                     </NavLink>
                     <NavLink 
                         className={({isActive}) =>`nav-item nav-link ${ isActive ? 'active' : '' }`}
+                        to="/registro"
+                    >
+                        Registro
+                    </NavLink>
+                    <NavLink 
+                        className={({isActive}) =>`nav-item nav-link ${ isActive ? 'active' : '' }`}
                         to="/export"
                     >
                         Graficas

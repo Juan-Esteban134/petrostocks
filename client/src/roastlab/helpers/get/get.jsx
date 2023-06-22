@@ -11,3 +11,15 @@ export function GetProductos() {
         throw error;
       });
   }
+
+  export function GetVentas() {
+    return axios.get("http://localhost:3001/ventas2")
+      .then((response) => {
+        console.log(response.data);
+        return response.data;
+      })
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  }

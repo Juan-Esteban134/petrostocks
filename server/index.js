@@ -151,7 +151,7 @@ datos.get("/ventas/:id", (req, res) => {
 
 // obtener ventas
 
-datos.get("/ventas", (req, res) => {
+datos.get("/ventass", (req, res) => {
     db.query('SELECT * FROM ventas', (err, result) => {
         if (err) {
             console.log(err);
@@ -161,6 +161,17 @@ datos.get("/ventas", (req, res) => {
         }
     });
 });
+
+datos.get("/ventas2",(req,res)=>{
+    db.query('SELECT * FROM ventas',
+    (err,resul)=>{
+        if(err){
+            console.log(err)
+        }else{
+            res.send(resul)
+        }
+    })
+})
 
 //editar venta
 
