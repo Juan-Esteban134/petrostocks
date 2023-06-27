@@ -9,6 +9,7 @@ import {
   Tooltip,
   Filler,
   Legend,
+  Chart,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
@@ -27,9 +28,14 @@ const options = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-    legend: {
-      position: 'top',
-    },
+        legend: {
+        position: 'top',
+        labels:{
+            font:{
+                size:14
+            }
+        }
+        }
   },
 };
 

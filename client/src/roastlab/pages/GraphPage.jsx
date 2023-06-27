@@ -18,10 +18,10 @@ export const GraphPage = () =>{
     return(
         <>
         <h2 style={{textAlign:'center'}}>Productos Mas Vendidos</h2>
-        <div className="chart-container" style={{height:'35vh', width:'1fr',paddingRight:'50px', paddingLeft:'50px'}}>
+        <div className="chart-container" style={{height:'35vh', width:'1fr',paddingRight:'10%', paddingLeft:'5%'}}>
         <LineMasVendidos Lista={ListaId} Ventas={Ventas}/>
         </div>
-        <div className="chart-container" style={{height:'35vh', width:'1fr' ,paddingRight:'90px', paddingLeft:'60px'}}>
+        <div className="chart-container" style={{height:'35vh', width:'1fr' ,paddingRight:'10%', paddingLeft:'5%'}}>
             <h2 style={{textAlign:'center'}}>Rentabilidad</h2>
         <MayorRentabilidad Lista={ListaRent} Rentabilidad={Rent}/>
         </div>
