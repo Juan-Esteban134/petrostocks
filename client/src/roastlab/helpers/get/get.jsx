@@ -67,4 +67,24 @@ export function GetProductos() {
         console.error(error);
         throw error;
       });
+    }
+      export function GetMayorRentabilidad(setLista, setRent) {
+        axios.get("http://localhost:3001/mayor-rentabilidad")
+        .then((response) => {
+          var productos = []
+          var rentabilidad = []
+          console.log(response.data);
+          for (let index = 0; index < response.data.length; index++) {
+            productos.push(response.data[index]['nombre'])
+            rentabilidad.push(response.data[index]['rentabilidad'])
+          }
+          console.log(productos)
+          setLista(productos)
+          console.log(rentabilidad);
+          setRent(rentabilidad)
+        })
+        .catch((error) => {
+          console.error(error);
+          throw error;
+        });
   }

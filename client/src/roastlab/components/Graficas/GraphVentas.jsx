@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -26,11 +26,7 @@ export function LineMasVendidos(props) {
         plugins: {
           legend: {
             position: 'top',
-          },
-          title: {
-            display: true,
-            text: 'Mas Vendidos',
-          },
+          }
         },
       };
       
@@ -40,7 +36,8 @@ export function LineMasVendidos(props) {
         labels,
         datasets: [
           {
-            label: 'Dataset 1',
+            fill: true,
+            label: 'Cantidad Vendidos',
             data: props.Ventas,
             borderColor: 'rgb(255, 99, 132)',
             backgroundColor: 'rgba(255, 99, 132, 0.5)',

@@ -234,7 +234,7 @@ datos.delete("/ventas/:id", (req, res) => {
 //prodcuto mas vendido
 
 datos.get("/productos_mas_vendidos", (req, res) => {
-    db.query('SELECT p.nombre, SUM(cantidadVenta) AS totalVentas FROM ventas JOIN productos p on ventas.idProducto=p.id GROUP BY idProducto ORDER BY totalVentas DESC', (err, result) => {
+    db.query('SELECT p.nombre, SUM(cantidadVenta) AS totalVentas FROM ventas JOIN productos p on ventas.idProducto=p.id GROUP BY idProducto ORDER BY totalVentas DESC LIMIT 6', (err, result) => {
         if (err) {
             console.log(err);
             res.status(500).json({ error: err.code });
@@ -302,14 +302,14 @@ datos.get("/ventas/total-ventas", (req, res) => {
 
 // producto de mayor rentabilidad 
 
-datos.get("/productos/mayor-rentabilidad", (req, res) => {
-    db.query('SELECT id, nombre, (valorVenta - valorComprar) AS rentabilidad FROM productos ORDER BY rentabilidad DESC LIMIT 1', (err, result) => {
+datos.get("/mayor-rentabilidad", (req, res) => {
+    db.query('SELECT id, nombre, round((((valorVenta - valorComprar)/valorComprar)*100),2) AS rentabilidad, valorVenta, valorComprar FROM productos ORDER BY rentabilidad DESC LIMIT 5', (err, result) => {
         if (err) {
             console.log(err);
             res.status(500).json({ error: err.code });
         } else {
             if (result.length > 0) {
-                res.send(result[0]);
+                res.send(result);
             } else {
                 res.status(404).json({ message: "No se encontraron productos" });
             }
