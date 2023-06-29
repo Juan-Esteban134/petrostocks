@@ -184,7 +184,7 @@ datos.get("/ventas2",(req,res)=>{
 })
 
 datos.get("/ganancias",(req,res)=>{
-    db.query('SELECT SUM(ganacias) AS sisa FROM ventas',
+    db.query('SELECT SUM(ganancias) AS sisa FROM ventas',
     (err,resul)=>{
         if(err){
             console.log(err)
@@ -417,7 +417,7 @@ datos.get("/ventas/egresos", (req, res) => {
                 } else {
                   // Insertar la venta en la tabla de ventas
                   db.query(
-                    'INSERT INTO ventas (idProducto, ganacias, cantidadVenta) VALUES (?, ?, ?)',
+                    'INSERT INTO ventas (idProducto, ganancias, cantidadVenta) VALUES (?, ?, ?)',
                     [idProducto, ganancias, cantidadVenta],
                     (err, result) => {
                       if (err) {

@@ -76,7 +76,7 @@ export function SellPage() {
 
   const formButtonStyle = {
     padding: "8px 16px",
-    backgroundColor: "#4CAF50",
+    backgroundColor: "#198754",
     color: "white",
     border: "none",
     borderRadius: "3px",
@@ -128,7 +128,7 @@ export function SellPage() {
               <td style={tdStyle}>{producto.cantidad}</td>
               <td style={tdStyle}>{producto.valorVenta}</td>
               <td style={tdStyle}>
-                <button onClick={() => handleEdit(producto)}>Vender</button>
+                <button className="btn btn-success mt-2" onClick={() => handleEdit(producto)}>Vender</button>
               </td>
             </tr>
           ))}

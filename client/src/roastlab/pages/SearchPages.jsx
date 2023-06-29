@@ -111,7 +111,7 @@ export function SearchPages() {
 
   return (
     <div>
-      <h1>Tabla de Productos</h1>
+      <h1 style={{textAlign:'center', backgroundColor:'grey', width:'100%', height:'60px'}}>Tabla de Productos</h1>
       <table style={tableStyle}>
         <thead>
           <tr>
@@ -143,8 +143,8 @@ export function SearchPages() {
               <td style={tdStyle}>{"$"+producto.valorComprar}</td>
               <td style={tdStyle}>{"$"+producto.valorVenta}</td>
               <td style={tdStyle}>
-                <button onClick={() => handleEdit(producto)}>Editar</button>
-                <button onClick={() => handleEdit2(producto.id)}>
+                <button className="btn btn-warning m-1" onClick={() => handleEdit(producto)}>Editar</button>
+                <button className="btn btn-danger" onClick={() => handleEdit2(producto.id)}>
                   Eliminar
                 </button>
               </td>
