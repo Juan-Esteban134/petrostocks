@@ -98,7 +98,7 @@ export function SellPage() {
 
   return (
     <div>
-      <h1>Venta de productos</h1>
+      <h1 style={{textAlign:'center', backgroundColor:'#FF6000', width:'100%', height:'80px', paddingTop:'15px', boxShadow:'0px 14px 15px -6px rgba(0,0,0,0.25)'}}>Venta de productos</h1>
       <table style={tableStyle}>
         <thead>
           <tr>

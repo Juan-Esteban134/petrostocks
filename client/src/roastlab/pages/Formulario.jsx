@@ -25,13 +25,14 @@ export const Formulario = () => {
 
   return (
     <div className='' style={{marginLeft: '30vh', marginRight: '30vh', marginTop: '5vh'}}>
-    <div className="form-group">
-        <label htmlFor="id">id</label>
+    <div className="form-group" >
+        <label htmlFor="id">ID</label>
         <input
           type="text"
           className="form-control"
           id="id"
           name="id"
+          placeholder='Ingrese el ID del Producto'
           value={Id}
           onChange={(event) =>{
             setId(event.target.value)
@@ -46,6 +47,7 @@ export const Formulario = () => {
           className="form-control"
           id="nombre"
           name="nombre"
+          placeholder='Ingrese el Nombre del Producto'
           value={Nombre}
           onChange={(event) =>{
             setNombre(event.target.value)
@@ -59,6 +61,7 @@ export const Formulario = () => {
           className="form-control"
           id="descripcion"
           name="descripcion"
+          placeholder='Ingrese la Descripción del Producto'
           value={Descripcion}
           onChange={(event) =>{
             setDescripcion(event.target.value)
@@ -74,6 +77,7 @@ export const Formulario = () => {
           className="form-control"
           id="precio"
           name="precio"
+          placeholder='Ingrese el Precio del Producto'
           value={Precio}
           onChange={(event) =>{
             setPrecio(event.target.value)
@@ -89,6 +93,7 @@ export const Formulario = () => {
           className="form-control"
           id="precioBruto"
           name="precioBruto"
+          placeholder='Ingrese el Precio de Compra'
           value={PrecioBruto}
           onChange={(event) =>{
             setPrecioBruto(event.target.value)
@@ -103,6 +108,7 @@ export const Formulario = () => {
           className="form-control"
           id="cantidad"
           name="cantidad"
+          placeholder='Ingrese la Cantidad de Productos'
           value={Cantidad}
           onChange={(event) =>{
             setCantidad(event.target.value)
