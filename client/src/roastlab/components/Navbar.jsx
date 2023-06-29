@@ -18,7 +18,7 @@ export const Navbar = () => {
                 className="navbar-brand" 
                 to="/"
             >
-                PetroStocks
+                Hyper Stonks
             </Link>
 
             <div className="navbar-collapse">
